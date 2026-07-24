@@ -6,7 +6,7 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
+    min-height:100vh;
 }
 
 .container{
@@ -15,6 +15,7 @@ body{
     max-width:600px;
 }
 
+/* Logo Design */
 .logo-container{
     text-align:center;
     padding:20px;
@@ -23,13 +24,19 @@ body{
 .logo{
     width:150px;
     height:auto;
+    border-radius:15px;
 }
 
+
+/* Search Engine Name */
 h1{
     color:#22c55e;
     font-size:50px;
+    margin-bottom:30px;
 }
 
+
+/* Search Box */
 input{
     width:100%;
     padding:15px;
@@ -37,8 +44,11 @@ input{
     border:2px solid #22c55e;
     border-radius:10px;
     outline:none;
+    box-sizing:border-box;
 }
 
+
+/* Search Button */
 button{
     margin-top:15px;
     padding:12px 25px;
@@ -50,10 +60,13 @@ button{
     cursor:pointer;
 }
 
+
 button:hover{
     background:#16a34a;
 }
 
+
+/* Founder Text */
 p{
     color:white;
     margin-top:20px;
