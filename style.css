@@ -18,11 +18,11 @@ body{
 /* Logo Design */
 .logo-container{
     text-align:center;
-    padding:20px;
+    padding:15px;
 }
 
 .logo{
-    width:150px;
+    width:220px;
     height:auto;
     border-radius:15px;
 }
