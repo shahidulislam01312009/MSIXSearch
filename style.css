@@ -15,6 +15,16 @@ body{
     max-width:600px;
 }
 
+.logo-container{
+    text-align:center;
+    padding:20px;
+}
+
+.logo{
+    width:150px;
+    height:auto;
+}
+
 h1{
     color:#22c55e;
     font-size:50px;
