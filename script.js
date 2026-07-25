@@ -1,8 +1,10 @@
 // ==============================
-// MSIX Search Version 3.0
+// MSIX Search Version 3.1
+// Search History System Added
 // ==============================
 
 const input = document.getElementById("search");
+
 
 // Main Search
 function searchNow() {
@@ -15,112 +17,264 @@ function searchNow() {
         return;
     }
 
-    // Save Search History
-    let history = JSON.parse(localStorage.getItem("msix_history")) || [];
 
-    history = history.filter(item => item !== text);
-    history.unshift(text);
+    saveHistory(text);
 
-    if (history.length > 10) {
-        history = history.slice(0, 10);
-    }
-
-    localStorage.setItem("msix_history", JSON.stringify(history));
 
     document.body.style.cursor = "wait";
 
+
     setTimeout(() => {
+
         window.location.href =
             "https://www.google.com/search?q=" +
             encodeURIComponent(text);
+
     }, 500);
 
 }
 
-// Press Enter to Search
-input.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") {
-        searchNow();
+
+
+// Save Search History
+function saveHistory(text) {
+
+    let history =
+    JSON.parse(localStorage.getItem("msix_history")) || [];
+
+
+    history = history.filter(item => item !== text);
+
+    history.unshift(text);
+
+
+    if (history.length > 10) {
+
+        history = history.slice(0,10);
+
     }
+
+
+    localStorage.setItem(
+        "msix_history",
+        JSON.stringify(history)
+    );
+
+
+    showHistory();
+
+}
+
+
+
+// Show Search History
+function showHistory() {
+
+
+    const historyBox =
+    document.getElementById("history");
+
+
+    if (!historyBox) return;
+
+
+    let history =
+    JSON.parse(localStorage.getItem("msix_history")) || [];
+
+
+    historyBox.innerHTML = "";
+
+
+    history.forEach(item => {
+
+
+        let button =
+        document.createElement("button");
+
+
+        button.innerText = item;
+
+
+        button.onclick = function(){
+
+            input.value = item;
+
+            searchNow();
+
+        };
+
+
+        historyBox.appendChild(button);
+
+
+    });
+
+
+}
+
+
+
+// Clear History
+function clearHistory(){
+
+
+    localStorage.removeItem("msix_history");
+
+
+    showHistory();
+
+
+}
+
+
+
+// Press Enter Search
+input.addEventListener("keydown", function(e){
+
+    if(e.key === "Enter"){
+
+        searchNow();
+
+    }
+
 });
 
-// Voice Search
-function startVoiceSearch() {
 
-    if (!("webkitSpeechRecognition" in window)) {
-        alert("Voice Search is not supported in this browser.");
+
+// Voice Search
+function startVoiceSearch(){
+
+
+    if(!("webkitSpeechRecognition" in window)){
+
+        alert("Voice Search is not supported.");
+
         return;
+
     }
 
-    const recognition = new webkitSpeechRecognition();
+
+    const recognition =
+    new webkitSpeechRecognition();
+
 
     recognition.lang = "en-US";
+
+
     recognition.interimResults = false;
+
+
     recognition.maxAlternatives = 1;
+
 
     recognition.start();
 
-    recognition.onresult = function (event) {
 
-        const speech = event.results[0][0].transcript;
+
+    recognition.onresult = function(event){
+
+
+        const speech =
+        event.results[0][0].transcript;
+
 
         input.value = speech;
 
+
         searchNow();
+
+
     };
 
-    recognition.onerror = function () {
+
+
+    recognition.onerror = function(){
+
         alert("Voice Search failed.");
+
     };
+
 
 }
+
+
 
 // Image Search
-function imageSearch() {
+function imageSearch(){
 
-    const text = input.value.trim();
+    const text=input.value.trim();
 
-    if (text === "") {
+
+    if(text===""){
+
         alert("Please type something.");
+
         return;
+
     }
 
+
     window.location.href =
-        "https://www.google.com/search?tbm=isch&q=" +
-        encodeURIComponent(text);
+    "https://www.google.com/search?tbm=isch&q="
+    + encodeURIComponent(text);
 
 }
+
+
 
 // Video Search
-function videoSearch() {
+function videoSearch(){
 
-    const text = input.value.trim();
+    const text=input.value.trim();
 
-    if (text === "") {
+
+    if(text===""){
+
         alert("Please type something.");
+
         return;
+
     }
 
+
     window.location.href =
-        "https://www.google.com/search?tbm=vid&q=" +
-        encodeURIComponent(text);
+    "https://www.google.com/search?tbm=vid&q="
+    + encodeURIComponent(text);
 
 }
+
+
 
 // News Search
-function newsSearch() {
+function newsSearch(){
 
-    const text = input.value.trim();
+    const text=input.value.trim();
 
-    if (text === "") {
+
+    if(text===""){
+
         alert("Please type something.");
+
         return;
+
     }
 
+
     window.location.href =
-        "https://news.google.com/search?q=" +
-        encodeURIComponent(text);
+    "https://news.google.com/search?q="
+    + encodeURIComponent(text);
 
 }
 
-console.log("MSIX Search Version 3 Loaded");
+
+
+// Load History When Page Opens
+window.onload = function(){
+
+    showHistory();
+
+};
+
+
+
+console.log("MSIX Search Version 3.1 Loaded");
