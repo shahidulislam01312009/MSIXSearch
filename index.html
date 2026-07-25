@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,7 +13,9 @@
 
 </head>
 
+
 <body>
+
 
 <nav class="navbar">
 
@@ -19,71 +23,147 @@
 MSIX Search
 </div>
 
+
 <ul class="nav-links">
+
 <li><a href="#">Home</a></li>
 <li><a href="#">Images</a></li>
 <li><a href="#">Videos</a></li>
 <li><a href="#">News</a></li>
 <li><a href="#">About</a></li>
 <li><a href="#">Contact</a></li>
+
 </ul>
 
 </nav>
 
+
+
 <div class="container">
 
+
 <div class="logo-container">
+
 <img src="1784913791471.png" class="logo" alt="MSIX Search">
+
 </div>
 
+
+
 <h1>MSIX Search</h1>
+
 
 <p class="subtitle">
 Fast • Simple • Smart Search Engine
 </p>
 
+
+
 <div class="search-box">
+
 
 <input
 type="text"
 id="search"
 placeholder="Search anything...">
 
+
 <button onclick="searchNow()">
 🔍 Search
 </button>
 
+
+<button onclick="startVoiceSearch()">
+🎤 Voice
+</button>
+
+
 </div>
+
+
+
+
 
 <div class="quick-links">
 
-<button>Images</button>
 
-<button>Videos</button>
+<button onclick="imageSearch()">
+🖼 Images
+</button>
 
-<button>News</button>
 
-<button>AI</button>
+
+<button onclick="videoSearch()">
+🎬 Videos
+</button>
+
+
+
+<button onclick="newsSearch()">
+📰 News
+</button>
+
+
+
+<button>
+🤖 AI
+</button>
+
+
 
 </div>
+
+
+
+
+
+<div class="history-box">
+
+<h3>Search History</h3>
+
+<div id="history"></div>
+
+</div>
+
+
+
+
 
 <p class="founder">
-Founder: <strong>MD. Shahidul Islam</strong>
+
+Founder:
+<strong>MD. Shahidul Islam</strong>
+
 </p>
 
+
 </div>
+
+
+
+
 
 <footer>
 
-<p>© 2026 MSIX Search</p>
+<p>
+© 2026 MSIX Search
+</p>
+
 
 <p>
 Privacy • Terms • Contact
 </p>
 
+
 </footer>
+
+
+
+
 
 <script src="script.js"></script>
 
+
 </body>
+
 </html>
