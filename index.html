@@ -68,9 +68,11 @@ id="search"
 placeholder="Search anything...">
 
 
+
 <button onclick="searchNow()">
 🔍 Search
 </button>
+
 
 
 <button onclick="startVoiceSearch()">
@@ -79,7 +81,6 @@ placeholder="Search anything...">
 
 
 </div>
-
 
 
 
@@ -110,20 +111,38 @@ placeholder="Search anything...">
 </button>
 
 
-
 </div>
 
 
 
 
+
+<!-- Search History Section -->
 
 <div class="history-box">
 
-<h3>Search History</h3>
 
-<div id="history"></div>
+<h3>
+🔍 Search History
+</h3>
+
+
+
+<div id="history">
 
 </div>
+
+
+
+<button onclick="clearHistory()">
+
+🗑 Clear History
+
+</button>
+
+
+</div>
+
 
 
 
@@ -137,13 +156,17 @@ Founder:
 </p>
 
 
+
 </div>
 
 
 
 
 
+
+
 <footer>
+
 
 <p>
 © 2026 MSIX Search
@@ -161,7 +184,10 @@ Privacy • Terms • Contact
 
 
 
+
+
 <script src="script.js"></script>
+
 
 
 </body>
