@@ -54,3 +54,40 @@ input.addEventListener("keypress",function(e){
 console.log(
 JSON.parse(localStorage.getItem("msix_history"))
 );
+// ==============================
+// Voice Search
+// ==============================
+
+function startVoiceSearch(){
+
+    if (!('webkitSpeechRecognition' in window)) {
+        alert("Voice Search is not supported on this browser.");
+        return;
+    }
+
+    const recognition = new webkitSpeechRecognition();
+
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.start();
+
+    recognition.onstart = function(){
+        alert("🎤 Speak now...");
+    };
+
+    recognition.onresult = function(event){
+
+        let speech = event.results[0][0].transcript;
+
+        document.getElementById("search").value = speech;
+
+        searchNow();
+    };
+
+    recognition.onerror = function(){
+        alert("Voice Search failed.");
+    };
+
+}
