@@ -4,10 +4,10 @@
 
 const input = document.getElementById("search");
 
-// Search Function
+// Main Search
 function searchNow() {
 
-    let text = input.value.trim();
+    const text = input.value.trim();
 
     if (text === "") {
         alert("Please type something to search.");
@@ -18,50 +18,37 @@ function searchNow() {
     // Save Search History
     let history = JSON.parse(localStorage.getItem("msix_history")) || [];
 
-    if (!history.includes(text)) {
-        history.unshift(text);
+    history = history.filter(item => item !== text);
+    history.unshift(text);
 
-        if (history.length > 10) {
-            history.pop();
-        }
-
-        localStorage.setItem("msix_history", JSON.stringify(history));
+    if (history.length > 10) {
+        history = history.slice(0, 10);
     }
 
-    // Loading
+    localStorage.setItem("msix_history", JSON.stringify(history));
+
     document.body.style.cursor = "wait";
 
-    setTimeout(function () {
-
+    setTimeout(() => {
         window.location.href =
-        "https://www.google.com/search?q=" +
-        encodeURIComponent(text);
-
-    },600);
+            "https://www.google.com/search?q=" +
+            encodeURIComponent(text);
+    }, 500);
 
 }
 
-// Enter Key Search
-input.addEventListener("keypress",function(e){
-
-    if(e.key==="Enter"){
+// Press Enter to Search
+input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
         searchNow();
     }
-
 });
 
-// Show History in Console
-console.log(
-JSON.parse(localStorage.getItem("msix_history"))
-);
-// ==============================
 // Voice Search
-// ==============================
+function startVoiceSearch() {
 
-function startVoiceSearch(){
-
-    if (!('webkitSpeechRecognition' in window)) {
-        alert("Voice Search is not supported on this browser.");
+    if (!("webkitSpeechRecognition" in window)) {
+        alert("Voice Search is not supported in this browser.");
         return;
     }
 
@@ -73,21 +60,67 @@ function startVoiceSearch(){
 
     recognition.start();
 
-    recognition.onstart = function(){
-        alert("🎤 Speak now...");
-    };
+    recognition.onresult = function (event) {
 
-    recognition.onresult = function(event){
+        const speech = event.results[0][0].transcript;
 
-        let speech = event.results[0][0].transcript;
-
-        document.getElementById("search").value = speech;
+        input.value = speech;
 
         searchNow();
     };
 
-    recognition.onerror = function(){
+    recognition.onerror = function () {
         alert("Voice Search failed.");
     };
 
 }
+
+// Image Search
+function imageSearch() {
+
+    const text = input.value.trim();
+
+    if (text === "") {
+        alert("Please type something.");
+        return;
+    }
+
+    window.location.href =
+        "https://www.google.com/search?tbm=isch&q=" +
+        encodeURIComponent(text);
+
+}
+
+// Video Search
+function videoSearch() {
+
+    const text = input.value.trim();
+
+    if (text === "") {
+        alert("Please type something.");
+        return;
+    }
+
+    window.location.href =
+        "https://www.google.com/search?tbm=vid&q=" +
+        encodeURIComponent(text);
+
+}
+
+// News Search
+function newsSearch() {
+
+    const text = input.value.trim();
+
+    if (text === "") {
+        alert("Please type something.");
+        return;
+    }
+
+    window.location.href =
+        "https://news.google.com/search?q=" +
+        encodeURIComponent(text);
+
+}
+
+console.log("MSIX Search Version 3 Loaded");
